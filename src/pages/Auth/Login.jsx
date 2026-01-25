@@ -2,6 +2,7 @@ import { useState } from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
+import { validateEmail, validatePassword } from "../../utils/helper";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,18 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError("Please enter a valid password");
+      return;
+    }
+
+    setError("");
   };
 
   return (
@@ -40,12 +53,17 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">LOGIN</button>
+          <button type="submit" className="btn-primary">
+            LOGIN
+          </button>
 
           <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?
-            <Link className="font-medium text-primary underline" to="/signup">
-            SignUp
+            <Link
+              className="font-medium text-primary underline ml-1"
+              to="/signup"
+            >
+              SignUp
             </Link>
           </p>
         </form>
