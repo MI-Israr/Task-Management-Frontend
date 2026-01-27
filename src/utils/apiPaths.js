@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = "http://localhost:5000";
 
 export const API_PATHS = {
   AUTH: {
@@ -12,7 +12,6 @@ export const API_PATHS = {
     CREATE_USER: "/api/users",
     DELETE_USER: (userId) => `/api/users/${userId}`,
     UPDATE_USER: (userId) => `/api/users/${userId}`,
-
   },
   TASKS: {
     GET_DASHBOARD_DATA: "/api/tasks/dashboard-data",

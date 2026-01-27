@@ -2,7 +2,9 @@ import { useState } from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
-import { validateEmail, validatePassword } from "../../utils/helper";
+import { validateEmail } from "../../utils/helper";
+import { API_PATHS } from "../../utils/apiPaths";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,12 +21,41 @@ const Login = () => {
       return;
     }
 
-    if (!validatePassword(password)) {
+    // if (!validatePassword(password)) {
+    //   setError("Please enter a valid password");
+    //   return;
+    // }
+    if (!password) {
       setError("Please enter a valid password");
       return;
     }
 
     setError("");
+
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+
+      const { token, role } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+
+        if (role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/user/dashboard");
+        }
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again");
+      }
+    }
   };
 
   return (

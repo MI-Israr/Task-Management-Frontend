@@ -3,6 +3,7 @@ import AuthLayout from "../../components/layout/AuthLayout";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import Input from "../../components/Inputs/Input";
 import { Link } from "react-router-dom";
+import { validateEmail } from "../../utils/helper";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -25,10 +26,14 @@ const SignUp = () => {
       return;
     }
 
-    if (!validatePassword(password)) {
+    if (!password) {
       setError("Please enter a valid password");
       return;
     }
+    // if (!validatePassword(password)) {
+    //   setError("Please enter a valid password");
+    //   return;
+    // }
 
     setError("");
   };
