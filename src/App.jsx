@@ -12,6 +12,7 @@ import ViewTaskDetails from "./pages/User/ViewTaskDetails";
 import UserProvider from "./context/UserContext";
 
 const App = () => {
+
   return (
     <UserProvider>
       <div>
