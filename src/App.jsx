@@ -12,7 +12,7 @@ import ViewTaskDetails from "./pages/User/ViewTaskDetails";
 import UserProvider from "./context/UserContext";
 
 const App = () => {
-//app.js
+  //app.js
   return (
     <UserProvider>
       <div>

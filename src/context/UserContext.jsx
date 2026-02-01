@@ -1,10 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 
-export const UserContext = createContext;
+export const UserContext = createContext(null);
 
-const UserProvider = ({}) => {
+const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,12 +41,11 @@ const UserProvider = ({}) => {
     localStorage.removeItem("token");
   };
 
-  return(
+  return (
     <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
       {children}
     </UserContext.Provider>
-  )
-
+  );
 };
 
 export default UserProvider;
