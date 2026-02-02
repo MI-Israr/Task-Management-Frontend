@@ -38,6 +38,8 @@ const App = () => {
                 element={<ViewTaskDetails />}
               />
             </Route>
+            {/*default route*/}
+            <Route path="/" element={<Root />} />
           </Routes>
         </Router>
       </div>
