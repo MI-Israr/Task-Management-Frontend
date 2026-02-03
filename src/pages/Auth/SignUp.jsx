@@ -14,7 +14,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [adminInviteToken, setAdminInviteToken] = useState("");
-  
+
   const [error, setError] = useState(null);
 
   const { updateUser } = useContext(UserContext);
@@ -22,6 +22,8 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter your full name");
@@ -46,10 +48,16 @@ const SignUp = () => {
 
     //SignUp API Call
     try {
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || "";
+      }
+
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         name: fullName,
         email,
         password,
+        profileImageUrl,
         adminInviteToken,
       });
 
@@ -72,7 +80,6 @@ const SignUp = () => {
         setError("Something went wrong. Please try again");
       }
     }
-
   };
 
   return (
