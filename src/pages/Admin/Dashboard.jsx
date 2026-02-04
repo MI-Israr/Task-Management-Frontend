@@ -6,7 +6,8 @@ const Dashboard = () => {
   useUserAuth();
 
   const { user } = useContext(UserContext);
-  return <div>Dashboard</div>;
+
+  return <DashboardLayout>Dashboard</DashboardLayout>;
 };
 
 export default Dashboard;
