@@ -25,3 +25,7 @@
 .btn-primary {
   @apply w-full text-sm font-medium text-white bg-primary shadow-lg shadow-purple-600/5 p-[10px] rounded my-1 hover:bg-blue-600/15 hover:text-blue-600 cursor-pointer transition;
 }
+
+.card {
+  @apply bg-white p-6 rounded shadow-md shadow-gray-100 border border-gray-200/50;
+}
