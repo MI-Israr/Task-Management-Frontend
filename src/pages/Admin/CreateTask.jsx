@@ -1,7 +1,7 @@
 import React from "react";
 
 const CreateTask = () => {
-  return <div>CreateTask</div>;
+  return <DashboardLayout activeMenu="Create Task">CreateTask</DashboardLayout>;
 };
 
 export default CreateTask;
