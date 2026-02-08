@@ -1,5 +1,3 @@
-import React from "react";
-
 const CreateTask = () => {
   return <DashboardLayout activeMenu="Create Task">CreateTask</DashboardLayout>;
 };
