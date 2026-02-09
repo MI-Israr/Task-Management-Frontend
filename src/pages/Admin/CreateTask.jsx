@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { LuTrash2 } from "react-icons/lu";
 import { useState } from "react";
+import SelectDropDown from "../../components/Inputs/SelectDropDown";
 
 const CreateTask = () => {
   const location = useLocation();
@@ -100,11 +101,14 @@ const CreateTask = () => {
             </div>
             <div className="grid grid-cols-12 gap-4 mt-2">
               <div className="col-sapn-6 md:col-span-4">
-                <label text>Priority</label>
+                <label className="text-xs font-medium text-slate-600">
+                  Priority
+                </label>
                 <SelectDropDown
                   options={PRIORITY_DATA}
                   value={taskData.priority}
                   onChange={(value) => handleValueChange("priority", value)}
+                  placeholder="Select Priority"
                 />
               </div>
             </div>
