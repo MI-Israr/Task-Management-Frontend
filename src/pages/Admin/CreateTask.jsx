@@ -8,6 +8,7 @@ import moment from "moment";
 import { LuTrash2 } from "react-icons/lu";
 import { useState } from "react";
 import SelectDropDown from "../../components/Inputs/SelectDropDown";
+import SelectUsers from "../../components/Inputs/SelectUsers";
 
 const CreateTask = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const CreateTask = () => {
   const [error, seterror] = useState("");
   const [loading, setLoading] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+  // const [selectedUsers, setSelectedUsers] = useState("");
 
   const handleValueChange = (key, value) => {
     setTaskData((prevData) => ({ ...prevData, [key]: value }));
@@ -70,6 +72,7 @@ const CreateTask = () => {
                 </button>
               )}
             </div>
+
             <div className="mt-4">
               <label className="text-xs font-medium text-slate-600">
                 Task Title
@@ -84,6 +87,7 @@ const CreateTask = () => {
                 }}
               />
             </div>
+
             <div className="mt-3">
               <label className="text-xs font-medium text-slate-600">
                 Description
@@ -99,6 +103,7 @@ const CreateTask = () => {
                 }
               />
             </div>
+
             <div className="grid grid-cols-12 gap-4 mt-2">
               <div className="col-sapn-6 md:col-span-4">
                 <label className="text-xs font-medium text-slate-600">
@@ -111,6 +116,31 @@ const CreateTask = () => {
                   placeholder="Select Priority"
                 />
               </div>
+            </div>
+
+            <div className="col-span-6 md:col-span-4">
+              <label className="text-xs font-medium">Due Date</label>
+              <input
+                placeholder="Create App UI "
+                className="form-input"
+                value={taskData.dueDate}
+                onChange={({ target }) =>
+                  handleValueChange("dueDate", target.value)
+                }
+                type="date"
+              />
+            </div>
+
+            <div className="col-span-12 md:col-span-3">
+              <label className="text-xs font-medium text-slate-600">
+                Assign To
+              </label>
+              <SelectUsers
+                selectedUsers={taskData.assignedTo}
+                setSelectedUsers={(value) => {
+                  handleValueChange("assignedTo", value);
+                }}
+              />
             </div>
           </div>
         </div>
