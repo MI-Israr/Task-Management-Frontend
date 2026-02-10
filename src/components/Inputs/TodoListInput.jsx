@@ -1,7 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+import { HiMiniPlus, HiOutlineTrash } from "react-icons/hi2";
 
 const TodoListInput = (todoList, setTodoList) => {
-  return <div>TodoListInput</div>;
+  const [option, setOption] = useState("");
+
+  const handleAddOptions = () => {
+    if (option.trim()) {
+      setTodoList([...todoList, option]);
+      setOption("");
+    }
+  };
+
+  const handleDeleteOption = (index) => {
+    const updatedArr = todoList.filter((_, i) => i !== index);
+    setTodoList(updatedArr);
+  };
+
+  return (
+    <div>
+      {todoList.map((item, index) => (
+        <div key={item} className="">
+          <p className="">
+            <span className="">{index < 9 ? `0${index + 1}` : index + 1}</span>
+            {item}
+          </p>
+          <button className="" onClick={() => handleDeleteOption(index)}>
+            <HiOutlineTrash className="" />
+          </button>
+        </div>
+      ))}
+
+      <div className="">
+        <input
+          type="text"
+          placeholder="Enter Task"
+          value={option}
+          onChange={({ target }) => setOption(target.value)}
+          className=""
+        />
+        <button className="" onClick={handleAddOptions}>
+          <HiMiniPlus className="" />
+          Add
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default TodoListInput;
