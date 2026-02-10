@@ -5,7 +5,7 @@ import { LuUsers } from "react-icons/lu";
 import Model from "../Model";
 import AvatarGroup from "../layout/AvatarGroup";
 
-const SelectUsers = (selectedUsers, setSelectedUsers) => {
+const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [tempSelectedUsers, setTempSelectedUsers] = useState([]);
@@ -33,7 +33,7 @@ const SelectUsers = (selectedUsers, setSelectedUsers) => {
   };
 
   const selectedUserAvatars = allUsers
-    .filter((user) => tempSelectedUsers.includes(user.id))
+    .filter((user) => tempSelectedUsers.includes(user._id))
     .map((user) => user.profileImageUrl);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const SelectUsers = (selectedUsers, setSelectedUsers) => {
       <Model
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="select Users"
+        title="Select Users"
       >
         <div className="space-y-4 h-[60vh] overflow-y-auto">
           {allUsers.map((user) => (
@@ -77,9 +77,7 @@ const SelectUsers = (selectedUsers, setSelectedUsers) => {
                 className="w-10 h-10 rounded-full"
               />
               <div className="flex-1">
-                <p className="font-medium text-gray-800 dark:text-white">
-                  {user.name}
-                </p>
+                <p className="font-medium text-gray-800 ">{user.name}</p>
                 <p className="text-[13px text-gray-500]">{user.email}</p>
               </div>
               <input
