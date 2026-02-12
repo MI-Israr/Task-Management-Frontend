@@ -10,6 +10,7 @@ import { useState } from "react";
 import SelectDropDown from "../../components/Inputs/SelectDropDown";
 import SelectUsers from "../../components/Inputs/SelectUsers";
 import TodoListInput from "../../components/Inputs/TodoListInput";
+import AddAttatchmentsInput from "../../components/Inputs/AddAttatchmentsInput";
 
 const CreateTask = () => {
   const location = useLocation();
@@ -167,6 +168,19 @@ const CreateTask = () => {
                   handleValueChange("attachments", value);
                 }}
               />
+            </div>
+
+            {error && (
+              <p className="text-xs font-medium text-red-500 mt-5"> {error}</p>
+            )}
+            <div className="flex justify-end mt-7">
+              <button
+                className="add-btn"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {taskId ? "Update Task" : "Create Task"}
+              </button>
             </div>
           </div>
         </div>
