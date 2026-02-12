@@ -50,7 +50,31 @@ const CreateTask = () => {
     });
   };
 
-  const createTask = async () => {};
+  const createTask = async () => {
+    setLoading(true);
+    try {
+      const todolist = taskData.todoChecklist?.map((item) => ({
+        text: item,
+        completed: false,
+      }));
+      const attachmentsString = taskData.attachments.join(", ");
+
+      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+        ...taskData,
+        dueDate: new Date(taskData.dueDate).toISOString(),
+        todoChecklist: todolist,
+        attachments: attachmentsString, // Send as string to satisfy backend validation
+      });
+      toast.success("task Created Successfully");
+      clearData();
+    } catch (error) {
+      console.error("Error Creating Task:", error);
+      toast.error(error.response?.data?.message || "Error Creating Task");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
   const updateTask = async () => {};
   const handleSubmit = async () => {
     if (!taskData.title.trim()) {
@@ -77,7 +101,7 @@ const CreateTask = () => {
       seterror("Task not assigned to any memeber");
       return;
     }
-    if (taskData.todoChecklist?.length) {
+    if (taskData.todoChecklist?.length === 0) {
       seterror("Add atleast one todo task");
       return;
     }
