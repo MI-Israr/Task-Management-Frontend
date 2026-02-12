@@ -57,13 +57,13 @@ const CreateTask = () => {
         text: item,
         completed: false,
       }));
-      const attachmentsString = taskData.attachments.join(", ");
+      // const attachmentsString = taskData.attachments.join(", ");
 
       const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
         ...taskData,
         dueDate: new Date(taskData.dueDate).toISOString(),
         todoChecklist: todolist,
-        attachments: attachmentsString, // Send as string to satisfy backend validation
+        attachments: taskData.attachments, // Send as string to satisfy backend validation
       });
       toast.success("task Created Successfully");
       clearData();
