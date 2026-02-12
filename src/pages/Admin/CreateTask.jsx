@@ -52,7 +52,43 @@ const CreateTask = () => {
 
   const createTask = async () => {};
   const updateTask = async () => {};
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    if (!taskData.title.trim()) {
+      seterror("Title is required");
+      return;
+    }
+
+    if (!taskData.description.trim()) {
+      seterror("Description is required");
+      return;
+    }
+
+    if (!taskData.dueDate) {
+      seterror("Due Date is required");
+      return;
+    }
+
+    if (!taskData.dueDate) {
+      seterror("Due Date is required");
+      return;
+    }
+
+    if (taskData.assignedTo.length === 0) {
+      seterror("Task not assigned to any memeber");
+      return;
+    }
+    if (taskData.todoChecklist?.length) {
+      seterror("Add atleast one todo task");
+      return;
+    }
+
+    if (taskId) {
+      updateTask();
+      return;
+    }
+
+    createTask();
+  };
   const getTaskDetailsByID = async () => {};
   const deleteTask = async () => {};
 
