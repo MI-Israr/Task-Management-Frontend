@@ -156,6 +156,18 @@ const CreateTask = () => {
                 }}
               />
             </div>
+
+            <div className="mt-3">
+              <label className="text-xs font-medium text-slate-600">
+                Add Attatchments
+              </label>
+              <AddAttatchmentsInput
+                attachments={taskData?.attachments}
+                setAttachments={(value) => {
+                  handleValueChange("attachments", value);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
