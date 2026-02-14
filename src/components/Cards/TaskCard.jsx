@@ -1,6 +1,18 @@
 import React from "react";
 
-const TaskCard = () => {
+const TaskCard = ({
+  title,
+  description,
+  status,
+  priority,
+  dueDate,
+  assignedTo,
+  todoChecklist,
+  attachments,
+  createdAt,
+  updatedAt,
+  onClick,
+}) => {
   return <div>TaskCard</div>;
 };
 

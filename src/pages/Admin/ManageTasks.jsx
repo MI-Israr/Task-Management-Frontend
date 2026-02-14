@@ -5,6 +5,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosInstance";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import TaskStatusTabs from "../../components/TaskStatusTabs";
+import TaskCard from "../../components/Cards/TaskCard";
 
 const ManageTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -80,7 +81,7 @@ const ManageTasks = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {allTasks?.map(() => (
+          {allTasks?.map((item) => (
             <TaskCard
               key={item._id}
               title={item.title}
