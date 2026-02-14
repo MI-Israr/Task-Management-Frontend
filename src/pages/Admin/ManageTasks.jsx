@@ -3,6 +3,8 @@ import DashboardLayout from "../../components/layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosInstance";
+import { LuFileSpreadsheet } from "react-icons/lu";
+import TaskStatusTabs from "../../components/TaskStatusTabs";
 
 const ManageTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -19,17 +21,19 @@ const ManageTasks = () => {
         },
       });
 
-      setAllTasks(response.data?tasks?.length > 0 ? response.data.tasks : []);
+      setAllTasks(response.data?.tasks?.length > 0 ? response.data.tasks : []);
 
-      const statusSummary = response.data?.statusSummary || {}
+      const statusSummary = response.data?.statusSummary || {};
       const statusArray = [
-        {label:"All", count: statusSummary.all || 0},
-        {label:"Pending", count: statusSummary.pendingTasks || 0},
-        {label:"In Progress", count: statusSummary.inProgressTasks || 0},
-        {label:"Completed", count: statusSummary.completed || 0}
-      ]
-      setTabs(statusArray)
-    } catch (error) {console.error(`Error fetching Users: ${error}`);
+        { label: "All", count: statusSummary.all || 0 },
+        { label: "Pending", count: statusSummary.pendingTasks || 0 },
+        { label: "In Progress", count: statusSummary.inProgressTasks || 0 },
+        { label: "Completed", count: statusSummary.completed || 0 },
+      ];
+      setTabs(statusArray);
+    } catch (error) {
+      console.error(`Error fetching Users: ${error}`);
+    }
   };
 
   const handleClick = (taskData) => {
@@ -44,7 +48,37 @@ const ManageTasks = () => {
 
   return (
     <DashboardLayout activeMenu="Manage Tasks">
-      <div className="my-5"></div>
+      <div className="my-5">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-xl md:text-xl font-medium">My Tasks</h2>
+            <button
+              className="flex md:hidden download-btn"
+              onClick={handleDownloadReport}
+            >
+              <LuFileSpreadsheet className="text-lg" />
+              Download Report
+            </button>
+          </div>
+
+          {allTasks?.length > 0 && (
+            <div className="flex items-center gap-3">
+              <TaskStatusTabs
+                tabs={tabs}
+                activeTab={filterStatus}
+                setActiveTab={setFilterStatus}
+              />
+              <button
+                className="hidden lg:flex download-btn"
+                onClick={handleDownloadReport}
+              >
+                <LuFileSpreadsheet className="text-lg" />
+                Download Report
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </DashboardLayout>
   );
 };
