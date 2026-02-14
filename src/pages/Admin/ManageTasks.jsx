@@ -78,6 +78,25 @@ const ManageTasks = () => {
             </div>
           )}
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {allTasks?.map(() => (
+            <TaskCard
+              key={item._id}
+              title={item.title}
+              description={item.description}
+              status={item.status}
+              priority={item.priority}
+              dueDate={item.dueDate}
+              assignedTo={item.assignedTo}
+              todoChecklist={item.todoChecklist}
+              attachments={item.attachments}
+              createdAt={item.createdAt}
+              updatedAt={item.updatedAt}
+              onClick={() => handleClick(item)}
+            />
+          ))}
+        </div>
       </div>
     </DashboardLayout>
   );
