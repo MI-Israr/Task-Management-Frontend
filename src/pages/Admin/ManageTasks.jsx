@@ -86,14 +86,15 @@ const ManageTasks = () => {
               key={item._id}
               title={item.title}
               description={item.description}
-              status={item.status}
               priority={item.priority}
-              dueDate={item.dueDate}
-              assignedTo={item.assignedTo}
-              todoChecklist={item.todoChecklist}
-              attachments={item.attachments}
+              status={item.status}
+              progress={item.progress}
               createdAt={item.createdAt}
-              updatedAt={item.updatedAt}
+              dueDate={item.dueDate}
+              assignedTo={item.assignedTo?.map((item) => item.profileImageUrl)}
+              attachmentCount={item.attachmentCount?.length || 0}
+              completedTodoCount={item.completedTodoCount || 0}
+              todoChecklist={item.todoChecklist || []}
               onClick={() => handleClick(item)}
             />
           ))}
