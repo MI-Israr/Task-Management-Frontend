@@ -131,6 +131,7 @@ const CreateTask = () => {
                   onClick={() => setOpenDeleteAlert(true)}
                 >
                   <LuTrash2 className="text-base" />
+                  Delete
                 </button>
               )}
             </div>
