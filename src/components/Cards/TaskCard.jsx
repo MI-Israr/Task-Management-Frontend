@@ -19,10 +19,12 @@ const TaskCard = ({
   onClick,
 }) => {
   const getStatusTagColor = () => {
-    switch (status) {
-      case "In Progress":
+    const safeStatus = status ? status.toLowerCase() : "";
+
+    switch (safeStatus) {
+      case "in progress":
         return "text-cyan-500 bg-cyan-50 border border-cyan-500/10";
-      case "Completed":
+      case "completed":
         return "text-lime-500 bg-lime-50 border border-lime-500/10";
       default:
         return "text-violet-500 bg-violet-50 border border-violet-500/10";
@@ -30,10 +32,12 @@ const TaskCard = ({
   };
 
   const getPriorityTagColor = () => {
-    switch (priority) {
-      case "Low":
+    const safePriority = priority ? priority.toLowerCase() : "";
+
+    switch (safePriority) {
+      case "low":
         return "text-emerald-500 bg-emerald-50 border border-emerald-500/10";
-      case "Medium":
+      case "medium":
         return "text-amber-500 bg-amber-50 border border-amber-500/10";
       default:
         return "text-rose-500 bg-rose-50 border border-rose-500/10";
@@ -52,7 +56,7 @@ const TaskCard = ({
           {status}
         </div>
         <div
-          className={`text-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounde`}
+          className={`text-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounded`}
         >
           {priority} Priority
         </div>
