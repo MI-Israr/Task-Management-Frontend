@@ -6,6 +6,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import TaskStatusTabs from "../../components/TaskStatusTabs";
 import TaskCard from "../../components/Cards/TaskCard";
+import { downloadExcelReport } from "../../utils/helper";
 
 const ManageTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -41,7 +42,9 @@ const ManageTasks = () => {
     navigate(`/admin/create-task`, { state: { taskId: taskData._id } });
   };
 
-  const handleDownloadReport = async () => {};
+  const handleDownloadReport = () => {
+    downloadExcelReport(API_PATHS.REPORTS.EXPORT_TASKS, "tasks_report.xlsx");
+  };
 
   useEffect(() => {
     getAllTasks(filterStatus);
