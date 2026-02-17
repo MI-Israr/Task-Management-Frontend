@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 const ViewTaskDetails = () => {
   const { id } = useParams();
@@ -16,7 +18,20 @@ const ViewTaskDetails = () => {
     }
   };
 
-  const getTaskDetailsById = async () => {};
+  const getTaskDetailsById = async () => {
+    try {
+      const response = await axiosInstance.get(
+        API_PATHS.TASKS.GET_TASK_BY_ID(id),
+      );
+      if (response.data) {
+        const taskTnfo = response.data;
+        setTask(taskTnfo);
+      }
+      setTask(response.data);
+    } catch (error) {
+      console.error(`Error fetching Task: ${error}`);
+    }
+  };
   const updateTodoChecklist = async (index) => {};
   const handleLinkClick = (link) => {
     window.open(link, "_blank");
